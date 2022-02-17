@@ -1,0 +1,30 @@
+version: '3.9'
+
+services:
+  couch-db:
+    container_name: db-perf-couch
+    environment:
+      COUCHDB_PASSWORD: password
+      COUCHDB_SECRET: password
+      COUCHDB_USER: admin
+    image: couchdb:3.2.1
+    ports:
+      - 5984:5984
+    restart: always
+    shm_size: 2gb
+    volumes:
+      - ./src/data/couch:/opt/couchdb/data
+
+  postgres-db:
+    container_name: db-perf-postgres
+    environment:
+      PGDATA: /data/postgres
+      POSTGRES_PASSWORD: secret
+      POSTGRES_USER: postgres
+    image: postgres:12.2-alpine
+    ports:
+      - 5432:5432
+    restart: always
+    shm_size: 2gb
+    volumes:
+      - ./src/data/postgres:/var/lib/postgresql/data

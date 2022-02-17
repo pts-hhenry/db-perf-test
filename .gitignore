@@ -1,0 +1,13 @@
+# OS and IDE
+.DS_Store
+.idea/
+.vscode/
+
+# Logs and envs
+**/*.log
+
+# Application and generated
+**/*.lock
+**/.eslintcache
+**/.npm
+**/node_modules/
