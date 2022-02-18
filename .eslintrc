@@ -64,6 +64,7 @@
     "indent": ["error", 2, { "SwitchCase": 1 }],
     "no-case-declarations": 0,
     "no-console": 2,
+    "no-plusplus": 0,
     "no-restricted-properties": 0,
     "object-property-newline": ["error", {}],
     "react/jsx-uses-react": "error",

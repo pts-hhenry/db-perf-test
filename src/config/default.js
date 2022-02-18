@@ -2,7 +2,7 @@ const { DEBUG, NODE_ENV } = process.env;
 
 const config = {
   app: {
-    debug: process.env.DEBUG === 'true',
+    debug: DEBUG === 'true',
     environment: NODE_ENV
   },
   db: {
@@ -11,19 +11,10 @@ const config = {
       domain: 'localhost',
       password: 'password',
       port: 5984,
-      requestDefaults: {
-        proxy: {
-          protocol: 'http',
-          host: 'myproxy.net'
-        },
-        headers: {
-          customheader: 'MyCustomHeader'
-        }
-      },
       schema: 'http://',
       user: 'admin'
     },
-    mongoose: {
+    mongoDb: {
       dbName: 'dbperf',
       domain: 'localhost',
       password: 'password',

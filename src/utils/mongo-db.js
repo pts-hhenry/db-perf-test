@@ -1,10 +1,18 @@
 const config = require('config');
 const mongoose = require('mongoose');
+const log = require('./log');
 
 const {
-  mongo: { dbName, domain, password, port, schema, user }
+  mongoDb: { dbName, domain, password, port, schema, user }
 } = config.get('db');
 
-mongoose.connect(`${schema}${user}:${password}@${domain}:${port}/${dbName}`);
+const initMongoConnect = async () => {
+  try {
+    const url = `${schema}${user}:${password}@${domain}:${port}/${dbName}?authSource=admin&w=1 `;
+    await mongoose.connect(url);
+  } catch (error) {
+    log.error(error);
+  }
+};
 
-module.exports = mongoose.connection;
+module.exports = initMongoConnect;

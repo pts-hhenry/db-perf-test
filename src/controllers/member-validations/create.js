@@ -1,7 +1,7 @@
 const Chance = require('chance');
-const couchDbUtils = require('../../utils/couch-db');
 const MemberValidationMongo = require('../../models/mongo/member-validation-schema');
 const MemberValidationPg = require('../../models/postgres/member-validation-schema');
+const couchDbUtils = require('../../utils/couch-db');
 
 const chance = new Chance();
 
@@ -30,7 +30,7 @@ const createMemberValidationsInCouch = async (data) => {
 
 const createMemberValidationsInMongo = async (data) => {
   try {
-    return await MemberValidationMongo.insertMany(data);
+    return await MemberValidationMongo.collection.insertMany(data);
   } catch (error) {
     return error;
   }
@@ -50,7 +50,8 @@ const createMemberValidations = async (dbEngine, count = 1) => {
       const couchMvData = [];
 
       for (let i = 0; i < count; i++) {
-        let record = createMockMemberValidation();
+        const record = createMockMemberValidation();
+        // eslint-disable-next-line no-underscore-dangle
         record._id = chance.guid({ version: 4 });
 
         couchMvData.push(record);
@@ -63,8 +64,7 @@ const createMemberValidations = async (dbEngine, count = 1) => {
       const mongoMvData = [];
 
       for (let i = 0; i < count; i++) {
-        let record = createMockMemberValidation();
-        record._id = chance.guid({ version: 4 });
+        const record = createMockMemberValidation();
 
         mongoMvData.push(record);
       }

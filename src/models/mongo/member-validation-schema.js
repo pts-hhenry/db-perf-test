@@ -1,6 +1,6 @@
-const { Schema } = require('mongoose');
+const mongoose = require('mongoose');
 
-const MemberValidations = new Schema({
+const schema = new mongoose.Schema({
   accountStatus: {
     type: String
   },
@@ -30,4 +30,6 @@ const MemberValidations = new Schema({
   }
 });
 
-module.exports = MemberValidations;
+const MemberValidation = mongoose.model('MemberValidation', schema);
+
+module.exports = MemberValidation;
