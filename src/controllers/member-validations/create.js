@@ -21,11 +21,7 @@ const createMockMemberValidation = () => {
 const createMemberValidationsInCouch = async (data) => {
   try {
     const dbPerf = couchDbUtils.use('dbperf');
-    const record = {
-      ...data,
-      _id: data.id
-    };
-    return await dbPerf.insert(record);
+    return await dbPerf.bulk({ docs: data });
   } catch (error) {
     return error;
   }
@@ -33,21 +29,32 @@ const createMemberValidationsInCouch = async (data) => {
 
 const createMemberValidationsInPostgres = async (data) => {
   try {
-    return await MemberValidationPg.create(data);
+    return await MemberValidationPg.bulkCreate(data);
   } catch (error) {
     return error;
   }
 };
 
 const createMemberValidations = async (dbEngine, count = 1) => {
-  for (let i = 0; i < count; i++) {
-    const mvData = createMockMemberValidation();
+  if (dbEngine === 'couch') {
+    const couchMvData = [];
 
-    if (dbEngine === 'couch') {
-      await createMemberValidationsInCouch(mvData);
-    } else {
-      await createMemberValidationsInPostgres(mvData);
+    for (let i = 0; i < count; i++) {
+      let record = createMockMemberValidation();
+      record._id = chance.guid({ version: 4 });
+
+      couchMvData.push(record);
     }
+
+    await createMemberValidationsInCouch(couchMvData);
+  } else {
+    const postgresMvData = [];
+
+    for (let i = 0; i < count; i++) {
+      postgresMvData.push(createMockMemberValidation());
+    }
+
+    await createMemberValidationsInPostgres(postgresMvData);
   }
 };
 
