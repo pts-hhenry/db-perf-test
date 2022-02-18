@@ -5,16 +5,13 @@
   "main": "index.js",
   "scripts": {
     "check:floating-dependencies": "node ./scripts/check-floating-dependencies.js",
-    "commitlint:feature-to-master-branch": "./scripts/commitlint-feature-to-master-branch.sh",
     "lint": "./scripts/lint.sh",
     "lint:fix": "./scripts/lint-fix.sh",
     "migrate:db-schema": "./scripts/migrate-db-schema.sh",
     "start:app": "scripts/start-app.sh",
     "start:app:watch": "scripts/start-app-watch.sh",
-    "start:db": "docker-compose up database",
-    "test": "./scripts/test.sh",
-    "test:open-api-spec": "testosa",
-    "validate:open-api-spec": "./scripts/validate-openapi-spec.sh"
+    "start:db": "docker-compose up",
+    "test": "./scripts/test.sh"
   },
   "author": "",
   "license": "ISC",
