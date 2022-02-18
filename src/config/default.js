@@ -7,8 +7,8 @@ const config = {
   },
   db: {
     couchDb: {
-      baseDomain: 'localhost',
       dbName: 'dbperf',
+      domain: 'localhost',
       password: 'password',
       port: 5984,
       requestDefaults: {
@@ -22,6 +22,14 @@ const config = {
       },
       schema: 'http://',
       user: 'admin'
+    },
+    mongoose: {
+      dbName: 'dbperf',
+      domain: 'localhost',
+      password: 'password',
+      port: 27017,
+      schema: 'mongodb://',
+      user: 'root'
     },
     postgres: {
       name: 'dbperf',

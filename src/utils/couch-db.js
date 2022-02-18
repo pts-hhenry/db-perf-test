@@ -2,11 +2,11 @@ const config = require('config');
 const nano = require('nano');
 
 const {
-  couchDb: { baseDomain, password, port, schema, user }
+  couchDb: { domain, password, port, schema, user }
 } = config.get('db');
 
 const options = {
-  url: `${schema}${user}:${password}@${baseDomain}:${port}`
+  url: `${schema}${user}:${password}@${domain}:${port}`
 };
 
 module.exports = nano(options);
